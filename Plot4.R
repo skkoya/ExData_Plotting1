@@ -18,7 +18,6 @@ if(! file.exists("household_power_consumption.txt")) {
 # Install required package "sqldf".
 #This package allows usage of sql type statements to read only the part of file that is required for the analysis.   
 #install.packages("sqldf)
-
 #load sqldf package
 library(sqldf)
 #Set the file name
@@ -30,13 +29,27 @@ pdata <- read.csv.sql(file, sql = daterange, sep = ";")
 # convert date and time variables to date and time classes using strptime()
 pdata$DateTime <- as.POSIXct(strptime(paste(pdata$Date,pdata$Time), "%d/%m/%Y %H:%M:%S"))
 # open png graphics devise and set parameters
-png(filename = "plot1.png",
+png(filename = "plot4.png",
     width = 480, 
     height = 480, 
     units = "px", 
     bg = "white")
-#make histogram of Global active power
-hist(pdata$Global_active_power,main="Global Active Power",
-     xlab="Global Active Power (Kilowats)",col="red",ylim= c(0, 1200))
-#Close png graphics devise
+#create multiple (4) base plots two rows and 2 columns
+#plots go from right to left, top to bottom. 
+par(mfrow = c(2,2))
+
+#plot 1
+plot(pdata$DateTime, pdata$Global_active_power, type="l", xlab="", ylab="Global Active Power")
+#plot 2
+plot(pdata$DateTime, pdata$Voltage, type="l", xlab="Date Time", ylab="Voltage")
+#plot 3 
+plot(x=pdata$DateTime,y=pdata$Sub_metering_1,type="l", xlab="",ylab="Energy Sub Meetering")
+lines(x=pdata$DateTime,y=pdata$Sub_metering_2, type="l",col="red")
+lines(x=pdata$DateTime,y=pdata$Sub_metering_3, type="l",col="blue")
+legendTxt <-c("Sub Meetering 1","Sub Meetering 2", "Sub Meetering 3")
+legend("topright",c("Sub Metering 1","Sub Metering 2", "Sub Metering 3"),lty=c(1,1,1),lwd=c(2.5,2.5,2.5),col=c("black","red","blue"))
+#plot 4 
+plot(pdata$DateTime, pdata$Global_reactive_power, type="l", xlab="Date Time", ylab="Global_reactive_power")
+
+#close png graphics device
 dev.off()

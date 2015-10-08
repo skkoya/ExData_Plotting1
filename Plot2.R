@@ -18,7 +18,6 @@ if(! file.exists("household_power_consumption.txt")) {
 # Install required package "sqldf".
 #This package allows usage of sql type statements to read only the part of file that is required for the analysis.   
 #install.packages("sqldf)
-
 #load sqldf package
 library(sqldf)
 #Set the file name
@@ -30,13 +29,12 @@ pdata <- read.csv.sql(file, sql = daterange, sep = ";")
 # convert date and time variables to date and time classes using strptime()
 pdata$DateTime <- as.POSIXct(strptime(paste(pdata$Date,pdata$Time), "%d/%m/%Y %H:%M:%S"))
 # open png graphics devise and set parameters
-png(filename = "plot1.png",
+png(filename = "plot2.png",
     width = 480, 
     height = 480, 
     units = "px", 
     bg = "white")
 #make histogram of Global active power
-hist(pdata$Global_active_power,main="Global Active Power",
-     xlab="Global Active Power (Kilowats)",col="red",ylim= c(0, 1200))
+plot(pdata$DateTime, pdata$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (Kilowatts)")
 #Close png graphics devise
 dev.off()
