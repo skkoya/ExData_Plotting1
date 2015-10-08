@@ -1,5 +1,5 @@
-#Plot1.R
-#Check to see if data is downloaded if not  
+#plot1.R
+#Check to see if data is downloaded 
 #if not download data from https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip
 fileName <- "household_power_consumption.zip"
 if(! file.exists(fileName)) {
