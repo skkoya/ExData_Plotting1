@@ -34,7 +34,7 @@ png(filename = "plot2.png",
     height = 480, 
     units = "px", 
     bg = "white")
-#make histogram of Global active power
+#make histogram of DateTime vs Global active power
 plot(pdata$DateTime, pdata$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (Kilowatts)")
 #Close png graphics devise
 dev.off()

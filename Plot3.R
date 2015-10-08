@@ -34,7 +34,8 @@ png(filename = "plot3.png",
     height = 480, 
     units = "px", 
     bg = "white")
-#make histogram of Global active power
+#make histogram of DateTime vs Energy sub metering. 
+#include different lines for each submeter
 plot(x=pdata$DateTime,y=pdata$Sub_metering_1,type="l", xlab="",ylab="Energy Sub Meetering")
 lines(x=pdata$DateTime,y=pdata$Sub_metering_2, type="l",col="red")
 lines(x=pdata$DateTime,y=pdata$Sub_metering_3, type="l",col="blue")
